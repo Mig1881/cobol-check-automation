@@ -3,15 +3,15 @@
 
 # Nos movemos a la carpeta de COBOL Check
 cd cobol-check
-chmod +x cobolcheck
+chmod +x bin/cobolcheck
 
 # Bucle para ejecutar las pruebas de los 3 programas
 for program in NUMBERS EMPPAY DEPTPAY; do
     echo "========================================="
     echo "Running cobolcheck for $program"
     
-    # Ejecutamos COBOL Check. (Es normal que falle si el programa aún no existe)
-    ./cobolcheck -p $program
+    # Ejecutamos COBOL Check apuntando a la carpeta bin
+    ./bin/cobolcheck -p $program
     
     # Si se ha generado el código con las pruebas inyectadas (CC##99.CBL), lo subimos al Mainframe
     if [ -f "CC##99.CBL" ]; then
