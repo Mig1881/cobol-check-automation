@@ -14,7 +14,7 @@ jobs:
       uses: actions/setup-java@v4
       with:
         java-version: '11'
-        distribution: 'adopt'
+        distribution: 'temurin'
 
     - name: Setup Mainframe Environment and Upload COBOL Check
       env:
@@ -23,7 +23,7 @@ jobs:
       run: |
         sudo apt-get install dos2unix
         dos2unix .github/scripts/zowe_operations.sh
-        npm install -g @zowe/cli
-        zowe config create --global-config true --user ${{ secrets.ZOWE_USERNAME }} --password ${{ secrets.ZOWE_PASSWORD }} --host 204.90.115.200 --port 10443 --reject-unauthorized false
+        npm install -g @zowe/cli@zowe-v2-lts
+        zowe profiles create zosmf-profile default --host 204.90.115.200 --port 10443 --user ${{ secrets.ZOWE_USERNAME }} --password ${{ secrets.ZOWE_PASSWORD }} --reject-unauthorized false --overwrite
         chmod +x .github/scripts/zowe_operations.sh
         .github/scripts/zowe_operations.sh
